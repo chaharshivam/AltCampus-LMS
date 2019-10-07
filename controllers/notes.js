@@ -1,4 +1,7 @@
+const showdown = require('showdown');
 const Note = require("../models/notes");
+
+const convertor = new showdown.Converter({ noHeaderId: true });
 
 // Defining methods for notes controller.
 module.exports = {
@@ -26,6 +29,8 @@ module.exports = {
   singleNote: async (req, res, next) => {
     try {
       const note = await Note.findOne({ _id: req.params.id });
+      note.description = await convertor.makeHtml(article.description);
+      
       return res.json({ success: true, note });
     } catch (err) {
       next(err);
