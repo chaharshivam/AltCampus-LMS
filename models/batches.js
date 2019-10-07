@@ -20,6 +20,6 @@ const batchSchema = new mongoose.Schema({
     }]
 }, { timestamps: true });
 
-const Batch = mongoose.model('Batch', blogSchema);
+const Batch = mongoose.model('Batch', batchSchema);
 
 module.exports = Batch;
