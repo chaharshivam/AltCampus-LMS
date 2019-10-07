@@ -1,0 +1,25 @@
+const mongoose = require('mongoose');
+
+const batchSchema = new mongoose.Schema({
+    number: {
+        type: Number,
+        required: true
+    },
+    members: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    }],
+    assignments: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Assignment'
+    }],
+    notes: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Note'
+    }]
+}, { timestamps: true });
+
+const Batch = mongoose.model('Batch', blogSchema);
+
+module.exports = Batch;

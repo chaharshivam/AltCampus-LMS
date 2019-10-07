@@ -36,6 +36,6 @@ const notesSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Notes = mongoose.model("Notes", blogSchema);
+const Note = mongoose.model("Note", notesSchema);
 
-module.exports = Notes;
+module.exports = Note;
