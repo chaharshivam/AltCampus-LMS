@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const notesSchema = new mongoose.Schema(
+const noteSchema = new mongoose.Schema(
   {
     day: {
       type: Number,
@@ -36,6 +36,6 @@ const notesSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Note = mongoose.model("Note", notesSchema);
+const Note = mongoose.model("Note", noteSchema);
 
 module.exports = Note;
