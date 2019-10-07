@@ -5,8 +5,8 @@ module.exports = {
   /* Mentor Routes */
   create: async (req, res, next) => {
     try {
-      const newBatch = await Batch.create(req.body);
-      return res.json({ success: true, newBatch });
+      const batch = await Batch.create(req.body);
+      return res.json({ success: true, batch });
     } catch (err) {
       next(err);
     }
@@ -14,8 +14,8 @@ module.exports = {
 
   delete: async (req, res, next) => {
     try {
-      const deletedBatch = await Batch.findByIdAndDelete(req.params.id);
-      return res.json({ success: true, deletedBatch });
+      const batch = await Batch.findByIdAndDelete(req.params.id);
+      return res.json({ success: true, batch });
     } catch (err) {
       next(err);
     }

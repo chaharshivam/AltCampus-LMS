@@ -5,8 +5,9 @@ module.exports = {
   // Create new blog
   create: async (req, res, next) => {
     try {
-      const newBlog = await Blog.create(req.body);
-      return res.json({ success: true, newBlog });
+      req.body.author = req.userId;
+      const blog = await Blog.create(req.body);
+      return res.json({ success: true, blog });
     } catch (err) {
       next(err);
     }
@@ -26,12 +27,17 @@ module.exports = {
   update: async (req, res, next) => {
     const { url, title, description } = req.body;
     try {
-      const updateBlog = await Blog.findByIdAndUpdate(
-        req.params.id,
-        { url, title, description },
-        { new: true }
-      );
-      return res.json({ success: true, updateBlog });
+      const blg = await Blog.findOne({_id: req.params.id});
+      if(blg.author == req.userId) {
+        const blog = await Blog.findByIdAndUpdate(
+          req.params.id,
+          { url, title, description },
+          { new: true }
+        );
+        return res.json({ success: true, blog });
+      } else {
+        return res.json({msg: 'Not Authorized'});
+      }
     } catch (err) {
       next(err);
     }
@@ -40,8 +46,13 @@ module.exports = {
   // Delete an existing article
   delete: async (req, res, next) => {
     try {
-      const deletedBlog = await Blog.findByIdAndDelete(req.params.id);
-      return res.json({ success: true, deletedBlog });
+      const blg = await Blog.findOne({_id: req.params.id});
+      if(blg.author == req.userId) {
+        const blog = await Blog.findByIdAndDelete(req.params.id);
+        return res.json({ success: true, blog });
+      } else {
+        return res.json({ msg: 'Not Authorized' });
+      }
     } catch (err) {
       next(err);
     }
