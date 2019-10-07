@@ -12,9 +12,13 @@ router.get('/auth/github', passport.authenticate('github'));
 
 router.get('/auth/github/callback', passport.authenticate('github', { failureRedirect: '/', session: false }), (req, res) => {
   
-  const token = auth.generateToken({ userId: req.user.id });
-
-	res.json({ authToken: token });
+  const token = auth.generateToken({
+    id: req.user.id,
+    isMentor: req.user.isMentor,
+    isAdmin: req.user.isAdmin
+  });
+  
+	return res.json({ token, profile: req.user })
 });
 
 module.exports = router;
