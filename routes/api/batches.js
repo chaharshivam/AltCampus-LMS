@@ -1,13 +1,20 @@
-var express = require("express");
-var batchController = require("../../controllers/batches");
-var router = express.Router();
+const express = require("express");
+const batchController = require("../../controllers/batches");
+const auth = require('../../middlewares/auth');
+const router = express.Router();
 
-// Create a new batch
-router.route("/").post(batchController.create);
+/*
+    GET - Read batches: Student + Mentor
+    POST - Create new batch: Mentor
+*/
+router
+    .route("/")
+    .get(auth.verifyToken, batchController.all)
+    .post(auth.verifyToken, batchController.create);
 
-// Delete an existing batch
-router.route("/:id").delete(batchController.delete);
+// DELETE - Delete a batch: Mentor
+router
+    .route("/:id")
+    .delete(auth.verifyToken, batchController.delete);
 
-// Read all batch
-router.route("/").get(batchController.all);
 module.exports = router;

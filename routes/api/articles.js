@@ -1,14 +1,20 @@
 const express = require("express");
 const articleController = require("../../controllers/article");
+const auth = require('../../middlewares/auth');
 const router = express.Router();
 
-// Student Read articles.
-router.route("/").get(articleController.all);
+/*
+    GET - Read all articles: Student + Mentor
+    POST - Create newArticle: Mentor
+*/
+router
+    .route("/")
+    .get(auth.verifyToken, articleController.all)
+    .post(auth.verifyToken, articleController.create);  
 
-// Mentor route. Create new article
-router.route("/").post(articleController.create);
-
-// Delete article
-router.route("/:id").delete(articleController.delete);
+// DELETE - Delete an article: Mentor
+router
+    .route("/:id")
+    .delete(auth.verifyToken, articleController.delete);
 
 module.exports = router;

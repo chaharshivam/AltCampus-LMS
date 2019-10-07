@@ -5,8 +5,8 @@ module.exports = {
   // Create new blog
   create: async (req, res, next) => {
     try {
-      const newBlog = await Blog.create(req.body);
-      return res.json({ success: true, newBlog });
+      const blog = await Blog.create(req.body);
+      return res.json({ success: true, blog });
     } catch (err) {
       next(err);
     }
@@ -26,12 +26,12 @@ module.exports = {
   update: async (req, res, next) => {
     const { url, title, description } = req.body;
     try {
-      const updateBlog = await Blog.findByIdAndUpdate(
+      const blog = await Blog.findByIdAndUpdate(
         req.params.id,
         { url, title, description },
         { new: true }
       );
-      return res.json({ success: true, updateBlog });
+      return res.json({ success: true, blog });
     } catch (err) {
       next(err);
     }
@@ -40,8 +40,8 @@ module.exports = {
   // Delete an existing article
   delete: async (req, res, next) => {
     try {
-      const deletedBlog = await Blog.findByIdAndDelete(req.params.id);
-      return res.json({ success: true, deletedBlog });
+      const blog = await Blog.findByIdAndDelete(req.params.id);
+      return res.json({ success: true, blog });
     } catch (err) {
       next(err);
     }

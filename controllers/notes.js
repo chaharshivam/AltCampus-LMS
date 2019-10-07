@@ -5,8 +5,8 @@ module.exports = {
   // Create notes
   create: async (req, res, next) => {
     try {
-      const newNote = await Note.create(req.body);
-      return res.json({ success: true, newNote });
+      const note = await Note.create(req.body);
+      return res.json({ success: true, note });
     } catch (err) {
       next(err);
     }
@@ -36,11 +36,12 @@ module.exports = {
   update: async (req, res, next) => {
     const {} = req.body;
     try {
-      const updatedNote = await Note.findByIdAndUpdate(
+      const note = await Note.findByIdAndUpdate(
         req.params.id,
         req.body,
         { new: true }
       );
+      return res.json({ success: true, note });
     } catch (err) {
       next(err);
     }
@@ -49,8 +50,8 @@ module.exports = {
   // Delete note
   delete: async(req, res, next) => {
       try {
-        const deletedNote = await Note.findByIdAndDelete(req.params.id);
-        return res.json({ success: true, deletedNote });
+        const note = await Note.findByIdAndDelete(req.params.id);
+        return res.json({ success: true, note });
       } catch(err) {
         next(err);
       }
