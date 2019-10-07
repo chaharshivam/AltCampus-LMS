@@ -22,4 +22,8 @@ router.use('/projects', projectRouter);
 router.use('/tags', tagRouter);
 router.use('/users', userRouter);
 
+router.get('/', (req, res, next) => {
+    res.json({ message: 'Welcome to API' });
+});
+
 module.exports = router;
