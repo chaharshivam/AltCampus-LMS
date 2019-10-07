@@ -8,7 +8,7 @@ const batchSchema = new mongoose.Schema({
     members: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: true
+        required: false
     }],
     assignments: [{
         type: mongoose.Schema.Types.ObjectId,
