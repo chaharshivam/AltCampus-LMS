@@ -10,7 +10,7 @@ const indexRouter = require('./routes/index');
 const apiRouter = require('./routes/api');
 const app = express();
 // Connect to Mongo DB
-mongoose.connect(process.env.DB_URL, { useNewUrlParser: true });
+mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 
@@ -19,7 +19,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
-
 // Strategy
 // require('./middlewares/passport');
 // Routes
