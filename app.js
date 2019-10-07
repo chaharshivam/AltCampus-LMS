@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 // Strategy
-// require('./middlewares/passport');
+require('./middlewares/passport');
 // Routes
 app.use('/', indexRouter);
 app.use('/api', apiRouter);
@@ -28,6 +28,7 @@ app.use('/api', apiRouter);
 // Error Handler
 app.use((err, req, res, next) => {
 	res.status(err.status || 500);
+	console.log(err);
 	res.json({ message: "Error Occured", err });
 });
 
