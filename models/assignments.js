@@ -29,7 +29,8 @@ const assignmentSchema = new mongoose.Schema({
     type: Boolean,
     required: true,
     default: false
-  }
+  },
+  asignee: Number
 }, { timestamps: true });
 
 const Assignment = mongoose.model('Assignment', assignmentSchema);
