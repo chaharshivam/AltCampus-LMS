@@ -1,7 +1,6 @@
 const Batch = require("../models/batches");
 
 // Defining methods for batch controller
-
 module.exports = {
   /* Mentor Routes */
   create: async (req, res, next) => {
