@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../../models/users');
+const user = require('../../controllers/user');
+const auth = require('../../middlewares/auth');
 /*
   GET - current user,
   POST - create user,
@@ -8,51 +10,22 @@ const User = require('../../models/users');
 */ 
 router
   .route('/')
-  .get(async (req, res, next) => {
-    try {
-      const users = await User.find({});
-      res.json({ users });
-    } catch (err) {
-      next(err);
-    }
-  })
-  .post(async (req, res, next) => {
-    try {
-      const createdUser = await User.create(req.body);
-      res.json({ user: createdUser });
-    } catch (err) {
-      next(err);
-    }
-  })
-  .put();
+  .get(auth.verifyToken, user.current)
+  .post(user.create)
+  .put(auth.verifyToken, user.update);
 /*
-  GET - user by id,
-  POST - create user (mentor),
-  PUT - update user (mentor),
+  GET - student by id,
+  PUT - update student (mentor),
   DELETE - remove user (mentor)
 */
 router
   .route('/:id')
-  .get(async (req, res, next) => {
-    try {
-      const user = await User.findById(req.params.id);
-      
-      user.validatePassword('hello', (err, isValidated) => {
-        if (isValidated) {
-          console.log('validated');
-        }
-      })
-      res.json({ user });
-    } catch (err) {
-      next(err);
-    }
-  })
-  .post()
-  .put()
-  .delete()
+  .get(user.profile)
+  .put(auth.verifyToken, user.updateStudent)
+  .delete(auth.verifyToken, user.deleteStudent)
 
 router
   .route('/login')
-  .post()
+  .post(user.login)
 
 module.exports = router;
