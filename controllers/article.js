@@ -24,11 +24,11 @@ module.exports = {
 
   // Delete an existing article.
   delete: async (req, res, next) => {
-      try {
-        const deletedArticle = await Article.findByIdAndDelete(req.params.id);
-        return res.json({ success: true, deletedArticle });
-      } catch (err) {
-        next(err);
-      }
-  }   
+    try {
+      const deletedArticle = await Article.findByIdAndDelete(req.params.id);
+      return res.json({ success: true, deletedArticle });
+    } catch (err) {
+      next(err);
+    }
+  }
 };
