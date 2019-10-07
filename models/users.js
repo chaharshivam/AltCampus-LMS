@@ -81,6 +81,26 @@ const userSchema = new mongoose.Schema({
   }
 }, { timestamps: true });
 
+userSchema.pre('save', function (next) {
+  const user = this;
+  
+  bcrypt.hash(user.password, 8, function (err, hash) {
+      if (err) return next(err);
+      console.log(hash, user.password);
+      user.password = hash;
+      next();
+  });
+});
+
+userSchema.methods.validatePassword = async function (textPassword, cb) {
+    
+  bcrypt.compare(textPassword, this.password, (err, isValidated) => {
+      if (err) return next(err);
+
+      return cb(null, isValidated);
+  });
+};
+
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;
