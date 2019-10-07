@@ -56,8 +56,7 @@ const userSchema = new mongoose.Schema({
     required: true
   },
   batch: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Batch'
+    type: Number
   },
   password: {
     type: String,
@@ -81,24 +80,17 @@ const userSchema = new mongoose.Schema({
   }
 }, { timestamps: true });
 
-userSchema.pre('save', function (next) {
+userSchema.pre('save', async function (next) {
   const user = this;
+  /*TODO: Determine mentors and admin by email/username*/
+  user.password = bcrypt.hashSync(user.password, 8);
   
-  bcrypt.hash(user.password, 8, function (err, hash) {
-      if (err) return next(err);
-      console.log(hash, user.password);
-      user.password = hash;
-      next();
-  });
+  next();
 });
 
-userSchema.methods.validatePassword = async function (textPassword, cb) {
-    
-  bcrypt.compare(textPassword, this.password, (err, isValidated) => {
-      if (err) return next(err);
-
-      return cb(null, isValidated);
-  });
+userSchema.methods.validatePassword = async function (textPassword) {
+  const match = await bcrypt.compare(textPassword, this.password);
+  return match;
 };
 
 const User = mongoose.model('User', userSchema);
