@@ -13,6 +13,7 @@ const app = express();
 mongoose.connect(process.env.DB_URL, { useNewUrlParser: true });
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
+mongoose.set('useUnifiedTopology', true);
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -21,7 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 
 // Strategy
-require('./middlewares/passport');
+// require('./middlewares/passport');
 // Routes
 app.use('/', indexRouter);
 app.use('/api', apiRouter);
