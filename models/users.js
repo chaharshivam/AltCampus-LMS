@@ -82,7 +82,15 @@ const userSchema = new mongoose.Schema({
 
 userSchema.pre('save', async function (next) {
   const user = this;
-  /*TODO: Determine mentors and admin by email/username*/
+  const mentorsUsername = ['nnnkit', 'prank7', 'ravi11o', 'suraj122'];
+  const adminUsername = ['chaharshivam', 'Swastikyadav'];
+
+  if (mentorsUsername.includes(user.username)) {
+    user.isMentor = true;
+  } else if (adminUsername.includes(user.username)) {
+    user.isAdmin = true;
+  }
+  
   user.password = bcrypt.hashSync(user.password, 8);
   
   next();
