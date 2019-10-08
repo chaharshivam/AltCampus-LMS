@@ -67,18 +67,28 @@ module.exports = {
   },
   updateStudent: async (req, res, next) => {
     try {
-      const student = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
+      const user = await User.findById(req.userId);
+      if(user.isMentor) {
+        const student = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
 
-      res.json({ student });
+        res.json({ student });
+      } else {
+        return res.json({ msg: 'Not Authorized' });
+      }
     } catch (err) {
       next(err);
     }
   },
   deleteStudent: async (req, res, next) => {
     try {
-      const student = await User.findByIdAndDelete(req.params.id);
-      
-      res.json({ student });
+      const user = await User.findById(req.userId);
+      if(user.isMentor) {
+        const student = await User.findByIdAndDelete(req.params.id);
+
+        res.json({ student });
+      } else {
+        return res.json({ msg: 'Not Authorized' });
+      }      
     } catch (err) {
       next(err);
     }
