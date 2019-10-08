@@ -15,9 +15,13 @@ module.exports = {
   // Create new article.
   create: async (req, res, next) => {
     try {
-      req.body.author = req.userId;
-      const article = await Article.create(req.body);
-      return res.json({ success: true, article });
+      if(req.isMentor) {
+        req.body.author = req.userId;
+        const article = await Article.create(req.body);
+        return res.json({ success: true, article });
+      } else {
+        return res.json({ msg: 'Not Authorized' });
+      }
     } catch (err) {
       next(err);
     }
@@ -26,12 +30,16 @@ module.exports = {
   // Delete an existing article.
   delete: async (req, res, next) => {
     try {
-      const art = await Article.findOne({_id: req.params.id});
-      if(art.author == req.userId) {
-        const article = await Article.findByIdAndDelete(req.params.id);
-        return res.json({ success: true, article });
+      if(req.isMentor) {
+        const {author} = await Article.findOne({_id: req.params.id});
+        if(author == req.userId) {
+          const article = await Article.findByIdAndDelete(req.params.id);
+          return res.json({ success: true, article });
+        } else {
+          return res.json({ msg: 'Unauthorized User' });
+        }
       } else {
-        return res.json({ msg: 'Unauthorized User' });
+        return res.json({ msg: 'Not Authorized' });
       }
     } catch (err) {
       next(err);
