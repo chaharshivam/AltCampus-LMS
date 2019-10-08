@@ -8,9 +8,13 @@ module.exports = {
   // Create notes
   create: async (req, res, next) => {
     try {
-      req.body.author = req.userId;
-      const note = await Note.create(req.body);
-      return res.json({ success: true, note });
+      if(req.isMentor) {
+        req.body.author = req.userId;
+        const note = await Note.create(req.body);
+        return res.json({ success: true, note });
+      } else {
+        return res.json({ msg: 'Not Authorized' });
+      }
     } catch (err) {
       next(err);
     }
@@ -29,8 +33,8 @@ module.exports = {
   // Read single note
   singleNote: async (req, res, next) => {
     try {
-      const note = await Note.findOne({ _id: req.params.id });
-      note.description = await convertor.makeHtml(article.description);
+      const note = await Note.findByIdAndRemove(req.params.id);
+      note.content = await convertor.makeHtml(note.content);
       
       return res.json({ success: true, note });
     } catch (err) {
@@ -41,17 +45,21 @@ module.exports = {
   // Update note
   update: async (req, res, next) => {
     try {
-      const nots = await Note.findOne({ _id: req.params.id });
-      if(nots.author == req.userId) {
-        const note = await Note.findByIdAndUpdate(
-          req.params.id,
-          req.body,
-          { new: true }
-        );
+      if(req.isMentor) {
+        const nots = await Note.findOne({ _id: req.params.id });
+        if(nots.author == req.userId) {
+          const note = await Note.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            { new: true }
+          );
+        } else {
+          return res.json({ msg: 'Not Authorized' });
+        }
+        return res.json({ success: true, note });
       } else {
         return res.json({ msg: 'Not Authorized' });
       }
-      return res.json({ success: true, note });
     } catch (err) {
       next(err);
     }
@@ -60,12 +68,17 @@ module.exports = {
   // Delete note
   delete: async(req, res, next) => {
       try {
-        const nots = await Note.findOne({ _id: req.params.id });
-        if(nots.author == req.userId) {
-          const note = await Note.findByIdAndDelete(req.params.id);
-          return res.json({ success: true, note });
+        if(req.isMentor) {
+          const nots = await Note.findOne({ _id: req.params.id });
+          if(nots.author == req.userId) {
+            let note = await Note.findByIdAndDelete(req.params.id);
+            note = await note.remove();
+            return res.json({ success: true, note });
+          } else {
+            return res.json({ msg: 'Not Authorized' });
+          }
         } else {
-           return res.json({ msg: 'Not Authorized' });
+          return res.json({ msg: 'Not Authorized' });
         }
       } catch(err) {
         next(err);
