@@ -14,12 +14,14 @@ const assignmentSchema = new mongoose.Schema({
     required: true
   },
   deadline: {
+    /*May change to Number*/
     type: Date,
     required: true
   },
-  tags: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Tag'
+  tag: {
+    type: String,
+    lowercase: true,
+    required: true
   },
   author: {
     type: mongoose.Schema.Types.ObjectId,
@@ -32,6 +34,27 @@ const assignmentSchema = new mongoose.Schema({
   },
   asignee: Number
 }, { timestamps: true });
+
+assignmentSchema.pre('save', async function(next) {
+  const Tag = await require('./tags');
+
+  const tag = await Tag.findOneAndUpdate(
+      {name: this.tag },
+      { $push: { assignments: this.id } },
+      { upsert: true }
+    );
+
+  next();
+});
+
+assignmentSchema.pre('remove', async function(next) {
+  const Tag = await require('./tags');
+
+  const tag = await Tag.findOneAndUpdate(
+    {name: this.tag },
+    { $pull: { assignments: this.id } }
+  );
+});
 
 const Assignment = mongoose.model('Assignment', assignmentSchema);
 
