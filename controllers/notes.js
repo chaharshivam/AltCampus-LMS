@@ -9,6 +9,7 @@ module.exports = {
   create: async (req, res, next) => {
     try {
       if(req.isMentor) {
+        req.body.tag = req.body.tag.toLowerCase();
         req.body.author = req.userId;
         const note = await Note.create(req.body);
         return res.json({ success: true, note });
