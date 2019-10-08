@@ -103,6 +103,7 @@ module.exports = {
         const student = await User.findByIdAndDelete(req.params.id);
         await Batch.findOneAndUpdate({ number: student.batch }, { $pull: { members: student.id }});
 
+        await student.remove();
         res.json({ student });
       } else {
         return res.json({ msg: 'Not Authorized' });
