@@ -1,12 +1,21 @@
 const Assignment = require('../models/assignments');
 const User = require('../models/users');
+const Batch = require('../models/batches');
 
 module.exports = {
   all: async (req, res, next) => {
     try {
+      if (req.isMentor) {
+        // return assignments authored by mentor
+        const assignments = await Assignment.find({ author: req.userId });
+        
+        return res.json({ assignments });
+      }
+      
       // return assignment of a user
-      const assignments = await User.findById(req.userId)
-        .populate('assignments');
+      const { batch } = await User.findById(req.userId);
+
+      const { assignments } = await Batch.findOne({ number: batch }).populate("assignments");
 
       res.json({ assignments });  
     } catch (err) {
@@ -15,18 +24,25 @@ module.exports = {
   },
   create: async (req, res, next) => {
     try {
-      req.body.author = req.userId;
-      const assignment = Assignment.create(req.body);
+      if (req.isMentor) {
+        req.body.author = req.userId;
+        const assignment = await Assignment.create(req.body);
 
-      res.json({ assignment });
+        await Batch.findOneAndUpdate({ number: assignment.asignee }, { $push: { assignments: assignment.id }})
+
+        return res.json({ assignment });
+      }
+      res.json({ message: 'Not Authorized!'});
     } catch (err) {
       next(err);
     }
   },
   update: async (req, res, next) => {
     try {
-      if (req.body.author == req.userId) {
-        const assignment = Assignment.findByIdAndUpdate(req.params.id, req.body);
+      const { author } = await Assignment.findById(req.params.id);
+
+      if (author == req.userId) {
+        const assignment = await Assignment.findByIdAndUpdate(req.params.id, req.body);
 
         res.json({ assignment });
       } else {
@@ -38,8 +54,12 @@ module.exports = {
   },
   delete: async (req, res, next) => {
     try {
-      if (req.body.author == req.userId) {
-        const assignment = Assignment.findByIdAndDelete(req.params.id);
+      const { author } = await Assignment.findById(req.params.id);
+
+      if (author == req.userId) {
+        const assignment = await Assignment.findByIdAndDelete(req.params.id);
+
+        await Batch.findOneAndUpdate({ number: assignment.asignee }, { $pull: { assignments: assignment.id }});
 
         res.json({ assignment });
       } else {
