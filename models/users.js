@@ -91,9 +91,12 @@ userSchema.pre('save', async function (next) {
     user.isAdmin = true;
   }
   
+  if (!this.isModified("password")) {
+    return next();
+  }
+
   user.password = bcrypt.hashSync(user.password, 8);
-  
-  next();
+  return next();
 });
 
 userSchema.methods.validatePassword = async function (textPassword) {
