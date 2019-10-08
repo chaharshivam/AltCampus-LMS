@@ -67,9 +67,14 @@ module.exports = {
   },
   updateStudent: async (req, res, next) => {
     try {
-      const user = await User.findById(req.userId);
-      if(user.isMentor) {
-        const student = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
+      if(req.isMentor || req.isAdmin) {
+        let student = await User.findById(req.params.id);
+
+        for(key in req.body) {
+          student[key] = req.body[key];
+        }
+      
+        student = await student.save();
 
         res.json({ student });
       } else {
@@ -81,8 +86,7 @@ module.exports = {
   },
   deleteStudent: async (req, res, next) => {
     try {
-      const user = await User.findById(req.userId);
-      if(user.isMentor) {
+      if(req.isMentor || req.isAdmin) {
         const student = await User.findByIdAndDelete(req.params.id);
 
         res.json({ student });
