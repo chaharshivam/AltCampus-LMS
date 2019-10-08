@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const User = require('../models/users');
 
 const projectSchema = new mongoose.Schema({
   title: {
@@ -25,12 +26,20 @@ const projectSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
-  technologies: [
-    {
-      type: String
-    }
-  ]
+  technologies: [String]
 }, { timestamps: true });
+
+projectSchema.pre('save', async function(next) {
+  const { author, id } = this;
+
+  await User.findByIdAndUpdate(author, { $push: { projects: id }});
+})
+
+projectSchema.pre('remove', async function(next) {
+  const { author, id } = this;
+
+  await User.findByIdAndUpdate(author, { $pull: { projects: id }});
+})
 
 const Project = mongoose.model('Project', projectSchema);
 
