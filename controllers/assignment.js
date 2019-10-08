@@ -26,6 +26,7 @@ module.exports = {
     try {
       if (req.isMentor) {
         req.body.author = req.userId;
+        req.body.tag = req.body.tag.toLowerCase();
         const assignment = await Assignment.create(req.body);
 
         await Batch.findOneAndUpdate({ number: assignment.asignee }, { $push: { assignments: assignment.id }})
@@ -61,6 +62,7 @@ module.exports = {
 
         await Batch.findOneAndUpdate({ number: assignment.asignee }, { $pull: { assignments: assignment.id }});
 
+        await assignment.remove();
         res.json({ assignment });
       } else {
         res.json({ message: "Not Authorized" });
