@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const User = require('../models/users');
 
 const blogSchema = new mongoose.Schema({
     title: {
@@ -25,6 +26,16 @@ const blogSchema = new mongoose.Schema({
         type: String 
     }]
 }, { timestamps: true });
+
+blogSchema.pre('save', async function(next) {
+    const { author, id } = this;
+    await User.findByIdAndUpdate(author, { $push: { blogs: id }});
+});
+
+blogSchema.pre('remove', async function (next) {
+    const { author, id } = this;
+    await User.findByIdAndUpdate(author, { $pull: { blogs: id }});
+});
 
 const Blog = mongoose.model('Blog', blogSchema);
 
