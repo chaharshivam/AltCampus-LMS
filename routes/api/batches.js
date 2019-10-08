@@ -12,9 +12,13 @@ router
     .get(auth.verifyToken, batchController.all)
     .post(auth.verifyToken, batchController.create);
 
-// DELETE - Delete a batch: Mentor
+/*
+    DELETE - Delete a batch: Mentor
+    PUT - Update a batch: Mentor
+*/
 router
     .route("/:id")
+    .put(auth.verifyToken, batchController.update)
     .delete(auth.verifyToken, batchController.delete);
 
 module.exports = router;
