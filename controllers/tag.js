@@ -16,6 +16,7 @@ module.exports = {
         
         res.json({ tags });
       } else {
+        const tags = await Tag.find();
         res.json({ tags });
       }
     } catch (err) {
