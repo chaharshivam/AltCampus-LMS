@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Batch = require('../models/batches');
 
 const noteSchema = new mongoose.Schema(
   {
@@ -9,7 +10,7 @@ const noteSchema = new mongoose.Schema(
     tag: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Tag',
-      required: true
+      required: false
     },
     title: {
       type: String,
@@ -35,6 +36,16 @@ const noteSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+noteSchema.pre('save', async function(next) {
+  const { batch, id } = this;
+  await Batch.findOneAndUpdate({ number: batch }, {$push: { notes: id }});
+});
+
+noteSchema.pre('remove', async function(next) {
+  const { batch, id } = this;
+  await Batch.findOneAndUpdate({ number: batch }, {$pull: { notes: id }});
+});
 
 const Note = mongoose.model("Note", noteSchema);
 
