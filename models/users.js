@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
+const Project = require('./projects');
+const Blog = require('./blogs');
+
 const userSchema = new mongoose.Schema({
   first_name: {
     type: String
@@ -97,6 +100,11 @@ userSchema.pre('save', async function (next) {
 
   user.password = bcrypt.hashSync(user.password, 8);
   return next();
+});
+
+userSchema.pre('remove', async function (next) {
+  await Blog.deleteMany({ author: this.id });
+  await Project.deleteMany({ author: this.id });
 });
 
 userSchema.methods.validatePassword = async function (textPassword) {
