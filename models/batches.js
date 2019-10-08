@@ -14,6 +14,10 @@ const batchSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Assignment'
     }],
+    isActive: {
+        type: Boolean,
+        default: true
+    },
     notes: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Note'
