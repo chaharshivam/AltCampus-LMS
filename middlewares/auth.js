@@ -10,7 +10,10 @@ exports.verifyToken = function (req, res, next) {
   if (token) {
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
       if (err) return res.status(400).json({ error: "Invalid Token" });
+      
       req.userId = decoded.id;
+      req.isMentor = decoded.isMentor;
+      req.isAdmin = decoded.isAdmin;
       next();
     });
   } else {
