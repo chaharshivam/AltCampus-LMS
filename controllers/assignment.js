@@ -15,7 +15,7 @@ module.exports = {
       // return assignment of a user
       const { batch } = await User.findById(req.userId);
 
-      const { assignments } = await Batch.findOne({ number: batch }).populate("assignments");
+      const { assignments } = await Assignment.find({ asignee: batch });
 
       res.json({ assignments });  
     } catch (err) {
