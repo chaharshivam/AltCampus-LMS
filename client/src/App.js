@@ -1,10 +1,14 @@
 import React from 'react';
+import Login from './pages/Login/Login';
+import API from './utils/API';
 
 function App() {
   return (
-    <div>
-      <h1>Hey!</h1>
-    </div>
+    <React.Fragment>
+      <div>
+        <Login />
+      </div>
+    </React.Fragment>
   );
 }
 
