@@ -1,56 +1,64 @@
 .sidebar {
+  z-index: 10;
+  display: none;
+}
+
+@media all and (min-width: 990px) {
+  .sidebar {
+    display: block;
     width: 260px;
     height: 100vh;
     background: $sidebar;
     position: fixed;
     top: 0;
     left: 0;
-    
+
     .sidebar-wrapper {
-        width: 90%;
-        height: 100vh;
-        margin: 0 auto;
+      width: 90%;
+      height: 100vh;
+      margin: 0 auto;
 
-        .logo-div {
-            align-items: center;
-            border-bottom: 2px solid $greyPrimary;
-            text-align-last: center;
-            img {
-                width: 100px;
-                margin: 0 auto;
-            }
-            a {
-                text-decoration: none;
-                color: $white;
-                font-size: 16px;
-                font-weight: 600;
-                line-height: 30px;
-            }
+      .logo-div {
+        align-items: center;
+        border-bottom: 2px solid $greyPrimary;
+        text-align-last: center;
+        img {
+          width: 100px;
+          margin: 0 auto;
         }
+        a {
+          text-decoration: none;
+          color: $white;
+          font-size: 16px;
+          font-weight: 600;
+          line-height: 30px;
+        }
+      }
 
-        span {
-            display: block;
-            margin: 50px 0;
-            a {
-                text-decoration: none;
-                color: rgb(173, 172, 172);
-                &:hover {
-                    color: $white;
-                }
-            }
-            .icon {
-                font-size: 30px;
-                margin-right: 20px;
-            }
+      span {
+        display: block;
+        margin: 50px 0;
+        a {
+          text-decoration: none;
+          color: rgb(173, 172, 172);
+          &:hover {
+            color: $white;
+          }
         }
-    
-        .active {
-            color: $success;
+        .icon {
+          font-size: 30px;
+          margin-right: 20px;
         }
+      }
+
+      .active {
+        color: $success;
+      }
     }
-}
+  }
 
-.main-content {
+  .main-content {
     margin-left: 260px;
     width: 100%;
+  }
 }
