@@ -9,6 +9,7 @@ module.exports = {
       if(!req.isMentor) {
         req.body.author = req.userId;
         const blog = await Blog.create(req.body);
+        
         return res.json({ success: true, blog });
       } else {
         return res.json({ msg: 'Not Authorized' });
