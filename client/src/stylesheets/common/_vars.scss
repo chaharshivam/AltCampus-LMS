@@ -1,0 +1,32 @@
+// Colors
+$blackPrimary: rgba(black, 0.9);
+$blackSecondary: rgba(black, 0.6);
+$blackTertiary: rgba(black, 0.4);
+
+$greyPrimary: rgba(grey, 0.8);
+$greySeconday: rgba(grey, 0.6);
+$greyTertiary: rgba(grey, 0.4);
+
+$background: #f4f3ef;
+$white: #ffffff;
+
+$success: #6bd098;
+$warning: #fbc658;
+$danger: #ef8157;
+$info: #51bcda;
+
+$sidebar: #212120;
+// Fonts
+$font: 'Montserrat', Helvetica, Arial, sans-serif;
+
+// box shadow that I like to use
+$shadow: 0 6px 10px -4px rgba(0,0,0,.15);
+
+// Mixin I like, below comment shows how to use it
+// @include border-radius(0.5rem);
+@mixin border-radius($radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+    border-radius: $radius;
+}

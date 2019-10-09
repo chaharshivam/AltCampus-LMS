@@ -1,0 +1,19 @@
+// Variables
+@import "./stylesheets/common/vars";
+// CSS Reset
+@import "./stylesheets/lib/reset";
+// Assign base values after reset
+@import "./stylesheets/lib/base";
+// Flex
+@import "./stylesheets/lib/flex";
+// Grid
+@import "./stylesheets/lib/grid";
+// General classes
+@import "./stylesheets/common/general";
+//Header
+@import "./stylesheets/common/header";
+
+// Add other files here
+
+// Footer
+@import "./stylesheets/common/footer";
