@@ -20,7 +20,7 @@ router
 router
     .route('/:id')
     .get(auth.verifyToken, notesController.singleNote)
-    .put(auth.verifyToken, notesController.update);
+    .put(auth.verifyToken, notesController.update)
     .delete(auth.verifyToken, notesController.delete);
 
 module.exports = router;
