@@ -3,9 +3,11 @@ import Sidebar from './components/Sidebar';
 
 function App() {
   return (
-    <div>
+    <div className="flex-start">
       <Sidebar />
-      <h1>Hey!</h1>
+      <aside className="main-content">
+        
+      </aside>
     </div>
   );
 }
