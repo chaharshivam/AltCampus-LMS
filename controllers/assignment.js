@@ -40,7 +40,24 @@ module.exports = {
   },
   update: async (req, res, next) => {
     try {
+      const { complete } = req.query; // complete can be true or false
       const { author } = await Assignment.findById(req.params.id);
+
+      if (complete) {
+        if (complete == 'true' && !req.isMentor) {
+          await User.findByIdAndUpdate(req.userId, 
+            { 
+              $pull: { assignments: req.params.id }, 
+              $push: { completed_assignments: req.params.id } 
+            });
+  
+          await User.findByIdAndUpdate(author, { $inc: { pr_merged: 1} });
+  
+          return res.json({ msg: 'assignment merged!' });
+        } else if (complete == 'false' && !req.isMentor) {
+          return res.json({ msg: 'Try later!'});
+        }
+      }
 
       if (author == req.userId) {
         const assignment = await Assignment.findByIdAndUpdate(req.params.id, req.body);
