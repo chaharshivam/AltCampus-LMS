@@ -37,23 +37,30 @@ const assignmentSchema = new mongoose.Schema({
 
 assignmentSchema.pre('save', async function(next) {
   const Tag = await require('./tags');
+  const User = await require('./users');
 
-  const tag = await Tag.findOneAndUpdate(
+  await Tag.findOneAndUpdate(
       {name: this.tag },
       { $push: { assignments: this.id } },
       { upsert: true }
     );
+  
+  await User.updateMany({ batch: this.asignee }, { $push: { assignments: this.id }});
 
   next();
 });
 
 assignmentSchema.pre('remove', async function(next) {
   const Tag = await require('./tags');
+  const User = await require('./users');
 
-  const tag = await Tag.findOneAndUpdate(
+  await Tag.findOneAndUpdate(
     {name: this.tag },
     { $pull: { assignments: this.id } }
   );
+
+  await User.updateMany({ batch: this.asignee }, { $pull: { assignments: this.id }});
+  await User.updateMany({ batch: this.asignee }, { $pull: { completed_assignments: this.id }});
 });
 
 const Assignment = mongoose.model('Assignment', assignmentSchema);
