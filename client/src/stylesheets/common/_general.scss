@@ -29,3 +29,30 @@ body {
 .border-radius-secondary {
   @include border-radius(0.25rem);
 }
+
+.input-field {
+  margin-bottom: 1rem;
+  padding: 0.25rem 0.5rem;
+  @include border-radius(0.25rem);
+  background: rgba(white, 0.2);
+  border: 2px solid $greyTertiary;
+  color: white;
+  &::placeholder {
+    color: white;
+  }
+  &:focus {
+    border: 2px solid white;
+  }
+}
+
+.btn {
+  padding: 0.25rem 0.5rem;
+  min-width: 50%;
+  @include border-radius(0.25rem);
+  background: $greySecondary;
+  border: 2px solid $greyTertiary;
+  color: white;
+  &:hover {
+    background: $greyPrimary;
+  }
+}
