@@ -69,6 +69,10 @@ const userSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Assignment'
   }],
+  completed_assignments: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Assignment'
+  }],
   isAdmin: {
     type: Boolean,
     default: false,
