@@ -12,8 +12,6 @@ router
     .route('/')
     .get(auth.verifyToken, notesController.all)
     .post(auth.verifyToken, notesController.create)
-    .put(auth.verifyToken, notesController.update);
-
 
 /*
     GET - Read a single note: Student + Mentor
@@ -22,6 +20,7 @@ router
 router
     .route('/:id')
     .get(auth.verifyToken, notesController.singleNote)
+    .put(auth.verifyToken, notesController.update);
     .delete(auth.verifyToken, notesController.delete);
 
 module.exports = router;
