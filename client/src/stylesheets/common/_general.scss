@@ -2,6 +2,7 @@ body {
   font-family: $font;
   color: $blackPrimary;
   background: $background;
+  box-sizing: border-box;
 }
 
 .wrapper {

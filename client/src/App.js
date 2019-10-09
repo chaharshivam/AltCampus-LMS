@@ -1,15 +1,25 @@
-import React from 'react';
-import Login from './pages/Login/Login';
-import API from './utils/API';
+import React from "react";
+import Sidebar from "./components/Sidebar";
+import Header from "./components/Header";
 
-function App() {
-  return (
-    <React.Fragment>
-      <div>
-        <Login />
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      
+    }
+  }
+
+  render() {
+    return (
+      <div className="flex-start">
+        <Sidebar />
+        <aside className="main-content">
+          <Header />
+        </aside>
       </div>
-    </React.Fragment>
-  );
+    );
+  }
 }
 
 export default App;
