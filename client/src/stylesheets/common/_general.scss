@@ -16,3 +16,15 @@ body {
 .padding-2 {
   padding: 2rem;
 }
+
+.shadow {
+  box-shadow: $shadow;
+}
+
+.border-radius-primary {
+  @include border-radius(0.75rem);
+}
+
+.border-radius-secondary {
+  @include border-radius(0.25rem);
+}
