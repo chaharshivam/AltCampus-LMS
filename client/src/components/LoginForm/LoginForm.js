@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import API from '../../utils/API';
 
 class LoginForm extends React.Component {
@@ -22,7 +23,9 @@ class LoginForm extends React.Component {
       password: this.state.password
     };
 
-    API.postLogin(user);
+    API.postLogin(user).then(profile => {
+      if(localStorage.token) this.props.history.push('/home');
+    })
     this.setState({ email: '', password: '' });
   }
 
@@ -63,4 +66,4 @@ class LoginForm extends React.Component {
   }
 }
 
-export default LoginForm;
+export default withRouter(LoginForm);

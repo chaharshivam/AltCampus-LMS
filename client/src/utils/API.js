@@ -7,7 +7,7 @@ const headers = {
 export default {
   // User requests
   postLogin: (payload) => {
-    fetch(`${baseURL}/api/users/login`, {
+    return fetch(`${baseURL}/api/users/login`, {
       method: 'POST',
       headers: headers,
       body: JSON.stringify(payload)
