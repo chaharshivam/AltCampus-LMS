@@ -1,8 +1,12 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+
 import API from '../../utils/API';
+import UserContext, { UserConsumer } from '../../context/userContext';
 
 class LoginForm extends React.Component {
+  static contextType = UserContext;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -24,7 +28,10 @@ class LoginForm extends React.Component {
     };
 
     API.postLogin(user).then(profile => {
-      if(localStorage.token) this.props.history.push('/home');
+      if(localStorage.token && localStorage.token !== '') {
+        this.context.updateUser(profile);
+        this.props.history.push('/home')
+      };
     })
     this.setState({ email: '', password: '' });
   }
@@ -32,8 +39,9 @@ class LoginForm extends React.Component {
   handleClick = e => {
     // API.getAssignments();
   }
-
+  
   render() {
+    
     return (
       <center className="form-wrapper padding-2 border-radius-primary shadow">
         <form className="login-form flex-center" onSubmit={this.handleSubmit}>
@@ -57,7 +65,7 @@ class LoginForm extends React.Component {
         </form>
         <div>
           <span className="first-time">First time here ?</span>
-          <a className="btn" onClick={this.handleClick}>
+          <a className="btn" href="http://localhost:3000/auth/github" onClick={this.handleClick}>
             <i className="fa fa-github"></i>
           </a>
         </div>
