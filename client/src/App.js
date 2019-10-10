@@ -6,12 +6,15 @@ import API from './utils/API';
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
 import Login from "./pages/Login/Login";
+import NavbarContext, { NavbarProvider } from "./context/navbarContext";
 
 class App extends React.Component {
+  static contextType = NavbarContext;
   constructor() {
     super();
     this.state = {
-      user: null
+      user: null,
+      active: 'dashboard'
     };
   }
 
@@ -27,6 +30,10 @@ class App extends React.Component {
         this.setState({ user })
       })
     }
+  }
+
+  updateHeader = (active) => {
+    this.setState({ active });
   }
 
   componentDidMount() {
@@ -80,7 +87,7 @@ class App extends React.Component {
 
   render() {
     return localStorage.token ? (
-      <>
+      <NavbarProvider value={{title: this.state.active, links: this.context.toggleHeader(this.state.active), toggleHeader: this.updateHeader }}>
         <div className="flex-between">
           <Sidebar />
           <div className="main-content">
@@ -88,7 +95,7 @@ class App extends React.Component {
             {this.privateRoutes()}
           </div>
         </div>
-      </>
+      </NavbarProvider>
     ) : (
       this.publicRoutes()
     );
