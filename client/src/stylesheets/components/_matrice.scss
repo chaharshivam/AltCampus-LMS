@@ -1,0 +1,25 @@
+.matrice-holder {
+  .matrice-card {
+    width: 100%;
+    background: $white;
+    height: 144px;
+    border-radius: 10px;
+    box-shadow: $shadow;
+    margin: 40px 0 10px 0;
+
+    p {
+      font-size: 18px;
+    }
+
+    .icon {
+      font-size: 30px;
+    }
+
+    @media all and (min-width: 760px) {
+      width: 205px;
+    }
+  }
+  @media all and (min-width: 760px) {
+    display: flex;
+  }
+}
