@@ -7,6 +7,7 @@ import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
 import Login from "./pages/Login/Login";
 import NavbarContext, { NavbarProvider } from "./context/navbarContext";
+import Profile from "./pages/Profile/Profile";
 
 class App extends React.Component {
   static contextType = NavbarContext;
@@ -63,7 +64,7 @@ class App extends React.Component {
           <h2>Home</h2>
         </Route>
         <Route path="/profile" exact>
-          <h2>Profile</h2>
+          <Profile />
         </Route>
         <Route path="/profile/:id" exact>
           <h2>Other Users profile</h2>
