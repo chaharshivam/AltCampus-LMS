@@ -24,23 +24,23 @@ input[type="checkbox"].header-checkbox:checked ~ .menu-links {
   }
 
   .menu-links {
-    width: 300px;
+    width: 350px;
     position: absolute;
     right: 10%;
     // display: block;
     a {
       text-decoration: none;
       color: rgb(102, 97, 91);
+      padding: 5px 0;
       &:hover {
         font-weight: bold;
       }
-      padding: 0 10px;
     }
     @media all and (max-width: 990px) {
       display: none;
-      margin-top: 180px;
+      margin-top: 230px;
       width: 150px;
-      padding: 5px;
+      padding: 10px;
       background: $sidebar;
       a {
         color: rgb(173, 172, 172);
