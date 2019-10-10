@@ -18,3 +18,13 @@
     display: flex;
     align-items: flex-start;
 }
+.flex-evenly {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.flex-around {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
