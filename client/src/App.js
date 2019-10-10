@@ -1,6 +1,8 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 
+import UserContext, { UserProvider } from './context/userContext';
+import API from './utils/API';
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
 import Login from "./pages/Login/Login";
@@ -8,14 +10,36 @@ import Login from "./pages/Login/Login";
 class App extends React.Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      user: null
+    };
+  }
+
+  updateUser = (profile = null) => {
+    if (profile) {
+      this.setState({ user: profile });
+      return;
+    }
+    
+    if (localStorage.token && localStorage.token !== '') {
+      API.getCurrentUser()
+      .then(user => {
+        this.setState({ user })
+      })
+    }
+  }
+
+  componentDidMount() {
+    this.updateUser();
   }
 
   publicRoutes = () => {
     return (
       <Switch>
         <Route path="/login">
-          <Login />
+          <UserProvider value={{ user: this.state.user, updateUser: this.updateUser }}>
+            <Login />
+          </UserProvider>
         </Route>
 
         <Route>
