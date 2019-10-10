@@ -6,6 +6,7 @@ import API from './utils/API';
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
 import Login from "./pages/Login/Login";
+import Dashboard from "./pages/Dashboard";
 import NavbarContext, { NavbarProvider } from "./context/navbarContext";
 import Profile from "./pages/Profile/Profile";
 
@@ -61,7 +62,7 @@ class App extends React.Component {
     return (
       <Switch>
         <Route path="/home" exact>
-          <h2>Home</h2>
+          <Dashboard />
         </Route>
         <Route path="/profile" exact>
           <Profile />
