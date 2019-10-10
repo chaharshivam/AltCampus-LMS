@@ -1,0 +1,129 @@
+.row {
+    margin-top: 1rem;
+}
+
+.profile-card {
+    position: relative;
+    overflow: hidden;
+    background: white;
+}
+
+.author {
+    flex-direction: column;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 34%;
+}
+
+.avatar {
+    @include border-radius(50%);
+    width: 35%;
+    border: 1px solid white;
+}
+
+.full-name {
+    color: $info;
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+.username {
+    color: $blackTertiary;
+    font-size: 0.85rem;
+}
+
+.bio {
+    flex-direction: column;
+    p {
+        margin-top: 8rem;
+        text-align: center;
+        color: $blackTertiary;
+    }
+
+    &::after {
+        display: block;
+        margin-top: 0.75rem;
+        content: '';
+        width: 70%;
+        height: 0.075rem;
+        border-radius: 100%;
+        background: $greyTertiary;
+    }
+}
+
+.social-links {
+    padding: 1rem 2rem;
+    .fa {
+        font-size: 1.5rem;
+    }
+}
+
+// Team
+.team {
+    margin: 1.5rem 0;
+    background: white;
+    overflow: hidden;
+    h4 {
+        font-weight: 500;
+        margin: 1rem 0;
+    }
+}
+
+.avatar-mini {
+    width: 100%;
+}
+
+.members {
+    flex-wrap: wrap;
+}
+
+.member-card {
+    padding: 0.25rem 0;
+    width: 45%;
+
+    .username {
+        padding: 0.25rem 1rem;
+    }
+}
+
+// Project
+.project-card {
+    background: white;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.project-details {
+    h5 {
+        margin-bottom: 1rem;
+    }
+
+    p {
+        color: $blackSecondary;
+    }
+}
+
+.project-tags {
+    margin-top: 1rem;
+}
+
+.project-tag {
+    margin-right: 0.75rem;
+    font-size: 0.75rem;
+    color: $blackTertiary;
+}
+
+.project-links {
+    margin-top: 1rem;
+    a {
+        margin-right: 0.75rem;
+        i {
+            font-size: 1.25rem;
+        }
+    }
+}
+
+@media all and (min-width: 760px) {
+    
+}
