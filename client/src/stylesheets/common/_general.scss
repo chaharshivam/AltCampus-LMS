@@ -56,3 +56,29 @@ body {
     background: $greyPrimary;
   }
 }
+
+// icons
+.fa-twitter {
+  color: #1da1f2;
+  &:hover {
+    color: rgba(#1da1f2, 0.4);
+  }
+}
+.fa-github {
+  color: #211e20;
+  &:hover {
+    color: rgba(#211e20, 0.4);
+  }
+}
+.fa-linkedin {
+  color: #006db8;
+  &:hover {
+    color: rgba(#006db8, 0.4);
+  }
+}
+.fa-globe {
+  color: $blackSecondary;
+  &:hover {
+    color: $greyTertiary;
+  }
+}
