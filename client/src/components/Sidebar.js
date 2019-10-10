@@ -1,102 +1,55 @@
 import React from "react";
-import { relative } from "path";
+import { NavLink } from "react-router-dom";
 
-class Sidebar extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      active: ""
-    };
-  }
-
-  handleClick = event => {
-    let { innerText } = event.target;
-    this.setState({
-      active: innerText
-    });
-  };
-
-  render() {
-    return (
-      <div className="sidebar-holder">
-        <input type="checkbox" className="sidebar-checkbox" id="checkbox_toggle" />
-        <aside className="sidebar">
-          <div className="sidebar-wrapper">
-            <div className="logo-div">
-              <a href="#">
-                <img src="/lms1.png" />
-              </a>
-            </div>
-            <span onClick={this.handleClick}>
-              <a
-                href="#"
-                className={
-                  this.state.active == `DASHBOARD`
-                    ? "flex-start active"
-                    : "flex-start"
-                }
-              >
-                <i className="fa fa-home icon"></i>
-                DASHBOARD
-              </a>
-            </span>
-            <span onClick={this.handleClick}>
-              <a
-                href="#"
-                className={
-                  this.state.active == `PROFILE`
-                    ? "flex-start active"
-                    : "flex-start"
-                }
-              >
-                <i className="fa fa-user icon"></i>
-                PROFILE
-              </a>
-            </span>
-            <span onClick={this.handleClick}>
-              <a
-                href="#"
-                className={
-                  this.state.active == `DAILY NOTES`
-                    ? "flex-start active"
-                    : "flex-start"
-                }
-              >
-                <i className="fa fa-book icon"></i>
-                DAILY NOTES
-              </a>
-            </span>
-            <span onClick={this.handleClick}>
-              <a
-                href="#"
-                className={
-                  this.state.active == `ASSIGNMENTS`
-                    ? "flex-start active"
-                    : "flex-start"
-                }
-              >
-                <i className="fa fa-pencil icon"></i>
-                ASSIGNMENTS
-              </a>
-            </span>
-            <span style={{ margin: "160px 0" }} onClick={this.handleClick}>
-              <a
-                href="#"
-                className={
-                  this.state.active == `ASSIGNMENTS`
-                    ? "flex-start active"
-                    : "flex-start"
-                }
-              >
-                <i className="fa fa-users icon"></i>
-                Meet The Creators
-              </a>
-            </span>
+function Sidebar() {
+  return (
+    <div className="sidebar-holder">
+      <input
+        type="checkbox"
+        className="sidebar-checkbox"
+        id="checkbox_toggle"
+      />
+      <aside className="sidebar">
+        <div className="sidebar-wrapper">
+          <div className="logo-div">
+            <a href="#">
+              <img src="/lms1.png" />
+            </a>
           </div>
-        </aside>
-      </div>
-    );
-  }
+          <span>
+            <NavLink to="/home">
+              <i className="fa fa-home icon"></i>
+              DASHBOARD
+            </NavLink>
+          </span>
+          <span>
+            <NavLink to="/profile">
+              <i className="fa fa-user icon"></i>
+              PROFILE
+            </NavLink>
+          </span>
+          <span>
+            <NavLink to="/notes">
+              <i className="fa fa-book icon"></i>
+              DAILY NOTES
+            </NavLink>
+          </span>
+          <span>
+            <NavLink to="/assignments">
+              <i className="fa fa-pencil icon"></i>
+              ASSIGNMENTS
+            </NavLink>
+          </span>
+          <span style={{ margin: "160px 0" }}>
+            <NavLink to="/creators">
+              <i className="fa fa-users icon"></i>
+              Meet The Creators
+            </NavLink>
+          </span>
+        </div>
+      </aside>
+    </div>
+  );
 }
 
 export default Sidebar;
