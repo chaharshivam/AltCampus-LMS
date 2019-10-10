@@ -19,7 +19,42 @@
       width: 205px;
     }
   }
+
   @media all and (min-width: 760px) {
     display: flex;
+  }
+}
+
+.articles {
+  width: 93.5%;
+  margin: 30px auto;
+  flex-wrap: wrap;
+  .article-card {
+    width: 48%;
+    box-shadow: $shadow;
+    background: $white;
+    border-radius: 10px;
+    padding: 20px;
+
+    h4 {
+      margin-bottom: 15px; 
+    }
+
+    a {
+      text-decoration: none;
+      color: grey;
+      &:hover {
+        color: $success;
+      }
+      li {
+        padding: 5px 0px;
+      }
+    }
+
+    @media all and (max-width: 760px) {
+      width: 95%;
+      margin: 20px auto;
+      flex-wrap: nowrap;
+    }
   }
 }

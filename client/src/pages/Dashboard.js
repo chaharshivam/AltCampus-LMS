@@ -2,6 +2,7 @@ import React from "react";
 import Matrice from "../components/Matrices";
 import TwitterCard from "../components/TwitterCard";
 import GithubCard from "../components/GithubCard";
+import Article from "../components/Articles";
 import API from "../utils/API";
 
 class Dashboard extends React.Component {
@@ -43,6 +44,10 @@ class Dashboard extends React.Component {
           />
           <TwitterCard />
           <GithubCard />
+        </div>
+        <div className="articles flex-between">
+          <Article articleType="General" />
+          <Article articleType="Tech" />
         </div>
       </>
     );
