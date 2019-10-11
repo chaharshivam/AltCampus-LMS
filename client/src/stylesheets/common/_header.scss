@@ -27,7 +27,7 @@ input[type="checkbox"].header-checkbox:checked ~ .menu-links {
     width: 350px;
     position: absolute;
     right: 10%;
-    // display: block;
+    z-index: 1;
     a {
       text-decoration: none;
       color: rgb(102, 97, 91);

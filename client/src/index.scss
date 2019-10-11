@@ -13,11 +13,13 @@
 //Header
 @import "./stylesheets/common/header";
 
-// Add other files here
+// Login
 @import "./stylesheets/login";
 // Footer
 @import "./stylesheets/common/footer";
 
+// Profile
+@import "./stylesheets/profile";
 // Sidebar
 @import "./stylesheets/common/sidebar";
 
@@ -26,3 +28,6 @@
 
 // Assignments - Card style
 @import "./stylesheets/_assignments";
+
+// Notes
+@import "./stylesheets/notes";
