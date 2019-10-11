@@ -59,7 +59,7 @@ export default {
   },
 
   // Articles requests
-  getArticles: (type = '') => {
+  getArticles: () => {
     /*TODO: Change required in API - according to type ? general : tech */
     return fetch(`${baseURL}/api/articles`, {
       method: 'GET',
