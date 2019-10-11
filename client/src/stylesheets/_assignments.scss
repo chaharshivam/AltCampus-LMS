@@ -1,0 +1,38 @@
+.assignments {
+  margin: 0 auto;
+  flex-wrap: wrap;
+
+  .assignment-card {
+    width: 100%;
+    padding: 15px;
+    background: $white;
+    box-shadow: $shadow;
+    border-radius: 10px;
+    margin-top: 40px;
+
+    h5 {
+      margin: 5px 0 10px 0;
+      font-size: 20px;
+    }
+    li {
+      a {
+        color: gray;
+        padding: 8px 0;
+      }
+      input {
+          border: 1px solid $greyPrimary;
+          padding: 2px;
+          margin: 0 5px; 
+      }
+    }
+
+    @media all and (min-width: 760px) {
+        width: 45%;
+        margin-top: 10%;
+    }
+  }
+
+  @media all and (min-width: 760px) {
+      flex-wrap: nowrap;
+  }
+}
