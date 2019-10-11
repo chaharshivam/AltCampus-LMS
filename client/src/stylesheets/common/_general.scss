@@ -34,23 +34,29 @@ body {
   margin-bottom: 1rem;
   padding: 0.25rem 0.5rem;
   @include border-radius(0.25rem);
-  background: rgba(white, 0.2);
-  border: 2px solid $greyTertiary;
-  color: white;
+  background: transparent;
+  border: 1px solid $greyTertiary;
+  color: $blackPrimary;
   &::placeholder {
-    color: white;
+    color: $blackSecondary;
   }
   &:focus {
-    border: 2px solid white;
+    border: 1px solid $greyPrimary;
+    background: wheat;
   }
+}
+
+.input-disabled {
+  cursor: not-allowed;
+  background: $greyTertiary;
 }
 
 .btn {
   padding: 0.25rem 0.5rem;
   min-width: 50%;
   @include border-radius(0.25rem);
-  background: $greySecondary;
-  border: 2px solid $greyTertiary;
+  background: $info;
+  border: 1px solid $greyTertiary;
   color: white;
   &:hover {
     background: $greyPrimary;
@@ -70,21 +76,31 @@ body {
     color: rgba(#211e20, 0.4);
   }
 }
+
 .fa-linkedin {
   color: #006db8;
   &:hover {
     color: rgba(#006db8, 0.4);
   }
 }
+
 .fa-globe {
   color: $blackSecondary;
   &:hover {
     color: $greyTertiary;
   }
+}
+
 .success {
   color: $success;
 }
 
 .danger {
   color: $danger;
+}
+
+@media all and (min-width: 760px) {
+  .input-field {
+    padding: 0.5rem 0.75rem;
+  }
 }
