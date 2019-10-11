@@ -1,0 +1,61 @@
+.notes {
+    .row {
+        flex-direction: column-reverse;
+    }
+}
+.notes-container {
+    overflow: hidden;
+    background: white;
+    width: 100%;
+    margin-top: 2rem;
+}
+
+.announcements {
+    width: 100%;
+    background: white;
+    min-height: 40vh;
+    min-width: 30vw;
+}
+
+.notes-heading {
+    margin-bottom: 1rem;
+}
+
+.notes-card {
+    border-top: 1px solid $greyTertiary;
+    padding: 0.25rem 0;
+    margin-bottom: 0.5rem;
+    color: $blackPrimary;
+}
+
+.notes-details {
+    color: $blackSecondary;
+
+    span {
+        font-size: 0.75rem;
+    }
+
+    a {
+        font-size: 0.75rem;
+    }
+}
+
+@media all and (min-width: 760px) {
+    .notes {
+        .row {
+            flex-direction: row;
+        }
+    }
+    .notes-container {
+        min-height: 40vh;
+        min-width: 40vw;
+        width: 50%;
+        margin-top: 0;
+    }
+    
+    .announcements {
+        min-height: 40vh;
+        min-width: 30vw;
+        width: 30%;
+    }
+}
