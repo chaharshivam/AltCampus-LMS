@@ -9,6 +9,7 @@ import Login from "./pages/Login/Login";
 import Dashboard from "./pages/Dashboard";
 import NavbarContext, { NavbarProvider } from "./context/navbarContext";
 import Profile from "./pages/Profile/Profile";
+import Notes from "./pages/Notes/Notes";
 
 class App extends React.Component {
   static contextType = NavbarContext;
@@ -61,22 +62,16 @@ class App extends React.Component {
   privateRoutes = () => {
     return (
       <Switch>
-        <Route path="/home" exact>
+        <Route path="/home">
           <Dashboard />
         </Route>
-        <Route path="/profile" exact>
+        <Route path="/profile">
           <Profile />
         </Route>
-        <Route path="/profile/:id" exact>
-          <h2>Other Users profile</h2>
+        <Route path="/notes">
+          <Notes />
         </Route>
-        <Route path="/notes" exact>
-          <h2>Daily Notes</h2>
-        </Route>
-        <Route path="/notes/:id" exact>
-          <h2>Single notes page</h2>
-        </Route>
-        <Route path="/assignments" exact>
+        <Route path="/assignments">
           <h2>Assignments</h2>
         </Route>
 
