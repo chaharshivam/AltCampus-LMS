@@ -1,8 +1,8 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 
-import UserContext, { UserProvider } from './context/userContext';
-import API from './utils/API';
+import UserContext, { UserProvider } from "./context/userContext";
+import API from "./utils/API";
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
 import Login from "./pages/Login/Login";
@@ -15,7 +15,7 @@ class App extends React.Component {
     super();
     this.state = {
       user: null,
-      active: 'dashboard'
+      active: "dashboard"
     };
   }
 
@@ -24,18 +24,17 @@ class App extends React.Component {
       this.setState({ user: profile });
       return;
     }
-    
-    if (localStorage.token && localStorage.token !== '') {
-      API.getCurrentUser()
-      .then(user => {
-        this.setState({ user })
-      })
-    }
-  }
 
-  updateHeader = (active) => {
+    if (localStorage.token && localStorage.token !== "") {
+      API.getCurrentUser().then(user => {
+        this.setState({ user });
+      });
+    }
+  };
+
+  updateHeader = active => {
     this.setState({ active });
-  }
+  };
 
   componentDidMount() {
     this.updateUser();
@@ -45,7 +44,9 @@ class App extends React.Component {
     return (
       <Switch>
         <Route path="/login">
-          <UserProvider value={{ user: this.state.user, updateUser: this.updateUser }}>
+          <UserProvider
+            value={{ user: this.state.user, updateUser: this.updateUser }}
+          >
             <Login />
           </UserProvider>
         </Route>
@@ -88,7 +89,13 @@ class App extends React.Component {
 
   render() {
     return localStorage.token ? (
-      <NavbarProvider value={{title: this.state.active, links: this.context.toggleHeader(this.state.active), toggleHeader: this.updateHeader }}>
+      <NavbarProvider
+        value={{
+          title: this.state.active,
+          links: this.context.toggleHeader(this.state.active),
+          toggleHeader: this.updateHeader
+        }}
+      >
         <div className="flex-between">
           <Sidebar />
           <div className="main-content">

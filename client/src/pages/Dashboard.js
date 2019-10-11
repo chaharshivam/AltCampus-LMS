@@ -1,8 +1,8 @@
 import React from "react";
-import Matrice from "../components/Matrices";
-import TwitterCard from "../components/TwitterCard";
-import GithubCard from "../components/GithubCard";
-import Article from "../components/Articles";
+import Matrice from "../components/Dashboard/Matrices";
+import TwitterCard from "../components/Dashboard/TwitterCard";
+import GithubCard from "../components/Dashboard/GithubCard";
+import Article from "../components/Dashboard/Articles";
 import API from "../utils/API";
 
 class Dashboard extends React.Component {
