@@ -7,6 +7,7 @@ import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
 import Login from "./pages/Login/Login";
 import Dashboard from "./pages/Dashboard";
+import Assignment from "./pages/Assignments";
 import NavbarContext, { NavbarProvider } from "./context/navbarContext";
 
 class App extends React.Component {
@@ -77,7 +78,7 @@ class App extends React.Component {
           <h2>Single notes page</h2>
         </Route>
         <Route path="/assignments" exact>
-          <h2>Assignments</h2>
+          <Assignment />
         </Route>
 
         <Route>
