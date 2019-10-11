@@ -1,5 +1,6 @@
 .row {
     margin-top: 1rem;
+    flex-wrap: wrap;
 }
 
 .profile-card {
@@ -88,6 +89,11 @@
 }
 
 // Project
+.aside {
+    flex-wrap: wrap;
+    width: 100%;
+    align-items: flex-start;
+}
 .project-card {
     background: white;
     overflow: hidden;
@@ -123,7 +129,83 @@
         }
     }
 }
+// Edit profile
+.profile-form {
+    flex-direction: column;
+    // border: 1px solid;
+    background: white;
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    input, textarea {
+        width: 100%;
+    }
+}
 
+.form-heading {
+    color: $blackPrimary;
+    align-self: flex-start;
+    margin-bottom: 1rem;
+}
+
+.disabled-inputs {
+    width: 100%;
+    flex-direction: column;
+    input {
+        width: 100%;
+    }
+}
+.edit-fullname {
+    width: 100%;
+    flex-direction: column;
+    input {
+        width: 100%;
+    }
+}
+.user-images {
+    width: 100%;
+    flex-direction: column;
+    input {
+        width: 100%;
+    }
+}
+// Blogs
+.blog-card {
+    overflow: hidden;
+}
 @media all and (min-width: 760px) {
-    
+    .row {
+        align-items: initial;
+    }
+    .col {
+        width: 30%;
+    }
+    .aside {
+        width: 65%;
+    }
+    .project-card {
+        width: 49%;
+    }
+
+    .disabled-inputs {
+        width: 100%;
+        flex-direction: row;
+        input {
+            width: 32%;
+        }
+    }
+    .edit-fullname {
+        width: 100%;
+        flex-direction: row;
+        input {
+            width: 49%;
+        }
+    }
+    .user-images {
+        width: 100%;
+        flex-direction: row;
+        input {
+            width: 49%;
+        }
+    }
 }
