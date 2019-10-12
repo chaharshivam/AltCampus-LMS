@@ -9,7 +9,7 @@ import EditProjects from '../../components/ProfileSettings/EditProjects';
 import EditBlogs from '../../components/ProfileSettings/EditBlogs';
 import BlogCard from '../../components/Blogs/BlogCard';
 
-function Profile({ match }) {
+function Profile() {
   return (
     <main>
       <div className="wrapper">
@@ -37,9 +37,6 @@ function Profile({ match }) {
                 <BlogCard />
               </Route>
               <Route path="/">
-                <Projects />
-                <Projects />
-                <Projects />
                 <Projects />
               </Route>
             </Switch>
