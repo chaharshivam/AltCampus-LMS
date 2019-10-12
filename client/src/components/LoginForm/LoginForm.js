@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 
 import API from '../../utils/API';
-import UserContext, { UserConsumer } from '../../context/userContext';
+import UserContext from '../../context/userContext';
 
 class LoginForm extends React.Component {
   static contextType = UserContext;
