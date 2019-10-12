@@ -1,36 +1,53 @@
 import React from 'react';
+import UserContext from '../../context/userContext';
 
 class ProfileCard extends React.Component {
+  static contextType = UserContext;
+  
   constructor(props) {
     super(props);
     this.state = {
-
+      user: null
     }
   }
 
+  componentDidMount() {
+    
+  }
+
   render() {
-    return (
+    const { user } = this.context;
+    console.log(user);
+    return user && (
       <div className="profile-card border-radius-primary shadow">
         <div className="cover">
-          <img src="https://www.geshnaprakritiyatra.com/uploads/2018/07/Indrahar-Pass-2.jpg" />
+          <img src={`${user.cover_url || 'https://www.geshnaprakritiyatra.com/uploads/2018/07/Indrahar-Pass-2.jpg'}`} />
         </div>
         <div className="author flex-center">
-          <img className="avatar" src="https://avatars0.githubusercontent.com/u/16636757?v=4" />
-          <p className="full-name padding-1">Shivam Chahar</p>
-          <p className="username">@chaharshivam</p>
+          <img className="avatar" src={`${user.avatar_url || 'https://static.asianetnews.com/img/default-user-avatar.png'}`} />
+          <p className="full-name padding-1">{`${user.first_name || ''} ${user.last_name || ''}`}</p>
+          <p className="username">@{user.username}</p>
         </div>
         <div className="bio flex-center padding-1">
           <p>
-            "I like the way you work it
-            No diggity
-            I wanna bag it up"
+            {
+              `${user.bio || ''}`
+            }
           </p>
         </div>
         <div className="social-links flex-between">
-          <a><i class="fa fa-github"></i></a>
-          <a><i class="fa fa-twitter"></i></a>
-          <a><i class="fa fa-linkedin"></i></a>
-          <a><i class="fa fa-globe"></i></a>
+          <a href={`${user.github || '#'}`}>
+            <i class="fa fa-github"></i>
+          </a>
+          <a href={`${user.twitter || '#'}`}>
+            <i class="fa fa-twitter"></i>
+          </a>
+          <a href={`${user.linkedin || '#'}`}>
+            <i class="fa fa-linkedin"></i>
+          </a>
+          <a href={`${user.website || '#'}`}>
+            <i class="fa fa-globe"></i>
+          </a>
         </div>
       </div>
     );

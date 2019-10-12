@@ -1,11 +1,16 @@
 import React from 'react';
+import API from '../../utils/API';
 
 class Members extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      members: null
     }
+  }
+
+  componentDidMount() {
+
   }
 
   render() {
