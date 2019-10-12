@@ -74,7 +74,11 @@ class App extends React.Component {
           <Notes />
         </Route>
         <Route path="/assignments">
-          <Assignment />
+          <UserProvider
+            value={{ user: this.state.user, updateUser: this.updateUser }}
+          >
+            <Assignment />
+          </UserProvider>
         </Route>
         <Route>
           <h2>Page not found</h2>
