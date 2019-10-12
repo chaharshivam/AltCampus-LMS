@@ -68,7 +68,11 @@ class App extends React.Component {
           <Dashboard />
         </Route>
         <Route path="/profile">
-          <Profile />
+          <UserProvider
+            value={{ user: this.state.user, updateUser: this.updateUser }}
+          >
+            <Profile />
+          </UserProvider>
         </Route>
         <Route path="/notes">
           <Notes />
@@ -101,8 +105,8 @@ class App extends React.Component {
         </div>
       </NavbarProvider>
     ) : (
-      this.publicRoutes()
-    );
+        this.publicRoutes()
+      );
   }
 }
 
