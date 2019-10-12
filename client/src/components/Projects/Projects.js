@@ -1,15 +1,21 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
+
+import API from '../../utils/API';
+import UserContext from '../../context/userContext';
 
 class Projects extends React.Component {
+  static contextType = UserContext;
+
   constructor(props) {
     super(props);
     this.state = {
-
+      projects: null
     }
   }
 
-  render() {
-    return (
+  projectCard(project) {
+    return project ? (
       <div className="project-card border-radius-primary shadow">
         <img src="https://www.geshnaprakritiyatra.com/uploads/2018/07/Indrahar-Pass-2.jpg" />
         <div className="project-details padding-1">
@@ -30,8 +36,16 @@ class Projects extends React.Component {
           </div>
         </div>
       </div>
+    ) : '';
+  }
+
+  render() {
+    return (
+      this.context.user && this.context.user.projects.length ?
+        this.context.user.projects.map(project => this.projectCard(project))
+        : <h4>No projects to show</h4>
     );
   }
 }
 
-export default Projects;
+export default withRouter(Projects);
