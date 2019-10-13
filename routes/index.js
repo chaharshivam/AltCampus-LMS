@@ -18,7 +18,8 @@ router.get('/auth/github/callback', passport.authenticate('github', { failureRed
     isAdmin: req.user.isAdmin
   });
   
-	return res.json({ token, profile: req.user })
+  return res.redirect(`http://localhost:3001/oauth/?t=${token}`);
+	// return res.json({ token, profile: req.user })
 });
 
 module.exports = router;
