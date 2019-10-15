@@ -13,6 +13,10 @@ class EditProjects extends React.Component {
     }
   }
 
+  handleSubmit() {
+    
+  }
+
   render() {
     return (
       <form className="profile-form shadow border-radius-primary padding-1">
