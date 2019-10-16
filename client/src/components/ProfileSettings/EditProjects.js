@@ -1,4 +1,5 @@
 import React from 'react';
+import API from '../../utils/API';
 
 class EditProjects extends React.Component {
   constructor(props) {
@@ -13,13 +14,19 @@ class EditProjects extends React.Component {
     }
   }
 
-  handleSubmit() {
-    
+  handleSubmit = e => {
+    e.preventDefault();
+    API.postProject(this.state)
+      .then(project => console.log(project))
+  }
+
+  handleChange = ({ target: { name, value } }) => {
+    this.setState({ [name]: value });
   }
 
   render() {
     return (
-      <form className="profile-form shadow border-radius-primary padding-1">
+      <form onSubmit={this.handleSubmit} className="profile-form shadow border-radius-primary padding-1">
         <h4 className="form-heading">Projects</h4>
         <input
           type="text"
@@ -27,6 +34,7 @@ class EditProjects extends React.Component {
           name="title"
           value={this.state.title}
           className="input-field"
+          onChange={this.handleChange}
         />
         <input
           type="text"
@@ -34,6 +42,7 @@ class EditProjects extends React.Component {
           name="image_url"
           value={this.state.image_url}
           className="input-field"
+          onChange={this.handleChange}
         />
         <input
           type="text"
@@ -41,6 +50,7 @@ class EditProjects extends React.Component {
           name="repo_url"
           value={this.state.repo_url}
           className="input-field"
+          onChange={this.handleChange}
         />
         <input
           type="text"
@@ -48,6 +58,7 @@ class EditProjects extends React.Component {
           name="live_url"
           value={this.state.live_url}
           className="input-field"
+          onChange={this.handleChange}
         />
         <input
           type="text"
@@ -55,6 +66,7 @@ class EditProjects extends React.Component {
           name="tags"
           value={this.state.tags}
           className="input-field"
+          onChange={this.handleChange}
         />
         <textarea 
           className="input-field"
@@ -62,6 +74,7 @@ class EditProjects extends React.Component {
           name="description"
           value={this.state.description}
           rows="5"
+          onChange={this.handleChange}
         />
         <input
           type="submit"
