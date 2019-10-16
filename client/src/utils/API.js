@@ -39,7 +39,10 @@ export default {
   getCurrentUser: () => {
     return fetch(`${baseURL}/api/users`, {
       method: 'GET',
-      headers: headers
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.token || ''
+      }
     })
       .then(res => res.json())
       .then(({ user }) => user)
