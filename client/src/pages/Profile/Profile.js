@@ -32,9 +32,6 @@ function Profile() {
               </Route>
               <Route path="/profile/blogs">
                 <BlogCard />
-                <BlogCard />
-                <BlogCard />
-                <BlogCard />
               </Route>
               <Route path="/">
                 <Projects />
